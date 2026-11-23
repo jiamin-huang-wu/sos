@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio – Jiamin Huang Wu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#c5dcf8;
+    --azul-gris:#a8c0dc;
+    --rosa:#f7b9ec;
+    --rosa-claro:#ffd9f5;
+    --texto:#111;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Playfair Display',serif;
+    background:#f5f5f5;
+    color:var(--texto);
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+
+  /* ====== CONTENEDOR ====== */
+  .pagina{
+    width:100%;
+    max-width:390px;
+    margin:0 auto;
+    background:#fff;
+    min-height:100vh;
+  }
+
+  /* ====== NAV ====== */
+  .nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 16px;font-size:13px;
+  }
+  .nav .logo{font-weight:500}
+  .nav .links{display:flex;gap:40px}
+
+  /* ====== PORTADA ====== */
+  .portada{padding:0 0 30px;position:relative}
+  .cinta-anio{
+    display:inline-block;background:var(--azul);
+    border:1px solid #333;padding:2px 14px;font-size:12px;
+    clip-path:polygon(0 0,100% 0,92% 50%,100% 100%,0 100%);
+  }
+  .portafolio-wrap{position:relative;height:200px;margin-top:10px}
+  .portafolio-wrap .hoja{
+    position:absolute;left:50%;top:40px;width:230px;height:100px;
+    background:var(--rosa);border:1px solid #333;
+  }
+  .hoja.h1{transform:translateX(-50%) rotate(-6deg);background:#ffc7f1}
+  .hoja.h2{transform:translateX(-50%) rotate(4deg);background:#f4a9e6}
+  .hoja.h3{
+    transform:translateX(-50%);background:var(--rosa);
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;font-weight:400;z-index:2;
+  }
+  .cinta-nombre{
+    position:absolute;right:0;top:150px;background:var(--rosa);
+    border:1px solid #333;padding:3px 14px 3px 22px;font-size:12px;z-index:3;
+    clip-path:polygon(8% 0,100% 0,100% 100%,8% 100%,0 50%);
+  }
+
+  /* ====== PRESENTACIÓN ====== */
+  .presentacion{position:relative;height:210px;margin:20px 0 0}
+  .presentacion .fondo-rosa{
+    position:absolute;left:0;bottom:0;width:70%;height:110px;background:var(--rosa);
+  }
+  .presentacion .personaje{
+    position:absolute;left:30px;bottom:30px;width:90px;height:150px;z-index:2;
+  }
+  .presentacion .tarjeta{
+    position:absolute;right:20px;top:20px;width:62%;
+    background:var(--rosa-claro);border-radius:12px;padding:14px 16px;
+    font-size:9px;line-height:1.5;font-weight:600;z-index:3;
+  }
+  .tarjeta ul{margin:2px 0 8px 14px}
+
+  /* ====== SECCIONES DE PROYECTO ====== */
+  .proyecto{padding:14px 40px 10px;text-align:center}
+  .proyecto h2{font-size:20px;font-weight:400;margin-bottom:10px}
+  .proyecto.azul{background:var(--azul)}
+  .proyecto.rosa{background:var(--rosa)}
+
+  .img-grande{width:210px;height:140px;margin:0 auto;background:#ddd}
+  .img-doble{display:flex;gap:16px;justify-content:center;align-items:flex-start}
+  .img-doble .a{width:100px;height:140px;background:#ddd}
+
+  .btn-info{
+    display:inline-block;margin:8px 0 10px;
+    background:var(--rosa);border-radius:20px;
+    padding:2px 14px;font-size:9px;font-family:'Playfair Display',serif;
+  }
+  .rosa .btn-info{background:var(--rosa-claro)}
+
+  /* fila de dos imágenes con fondos divididos */
+  .par{display:flex}
+  .par > div{width:50%;padding:12px 0;display:flex;justify-content:center}
+  .par .izq{background:var(--azul-gris)}
+  .par .der{background:var(--rosa-claro)}
+  .par .foto{width:100px;height:130px;background:#ddd;overflow:hidden;border-radius:6px}
+
+  /* ====== CONTACTO ====== */
+  .contacto{
+    background:var(--rosa);border-radius:18px 18px 0 0;
+    padding:18px 50px 20px;text-align:center;
+  }
+  .contacto h2{font-size:20px;font-weight:400;margin-bottom:14px}
+  .contacto a{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--azul-gris);border-radius:20px;
+    padding:4px 10px;margin-bottom:8px;font-size:9px;color:#fff;
+  }
+
+  /* ====== PÁGINAS DETALLE (Más info) ====== */
+  .detalle{display:none}
+  .detalle:target{display:block}
+  body:has(.detalle:target) .home{display:none}
+
+  .detalle .hoja-det{
+    width:100%;max-width:390px;margin:0 auto;min-height:100vh;padding:24px 28px 40px;
+  }
+  .detalle.azul .hoja-det{background:var(--azul)}
+  .detalle.rosa .hoja-det{background:var(--rosa)}
+  .detalle h2{font-size:22px;font-weight:400;text-align:center;margin-bottom:16px}
+  .detalle .volver{display:inline-block;font-size:11px;margin-bottom:10px;text-decoration:underline}
+  .detalle .portada-det{width:100%;height:180px;background:#ddd;margin:0 auto 14px}
+  .detalle p,.detalle li{font-size:9.5px;line-height:1.5;font-weight:600}
+  .detalle .centrado{text-align:center;max-width:320px;margin:0 auto 16px}
+
+  .fila{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+  .fila.inversa{flex-direction:row-reverse}
+  .fila .foto{flex:0 0 38%;height:170px;background:#ddd;overflow:hidden}
+  .fila .foto.horizontal{height:110px}
+  .fila .txt{flex:1}
+  .fila .txt p{margin-bottom:8px}
+  .detalle ul{margin:4px 0 8px 18px}
+
+  .grid-fotos{display:flex;gap:12px;justify-content:center;margin-bottom:16px}
+  .grid-fotos .foto{width:46%;height:170px;background:#ddd;overflow:hidden}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PÁGINA PRINCIPAL
+     ============================================================ -->
+<div class="pagina home" id="inicio">
+
+  <nav class="nav">
+    <span class="logo">jiamin designs</span>
+    <span class="links">
+      <a href="#contacto">contacto</a>
+      <a href="#proyectos">proyectos</a>
+    </span>
+  </nav>
+
+  <!-- PORTADA -->
+  <header class="portada">
+    <span class="cinta-año">2026</span>
+    <div class="portafolio-wrap">
+      <div class="hoja h1"></div>
+      <div class="hoja h2"></div>
+      <div class="hoja h3">Portafolio</div>
+      <span class="cinta-nombre">Jiamin Huang Wu</span>
+    </div>
+  </header>
+
+  <!-- PRESENTACIÓN -->
+  <section class="presentacion">
+    <div class="fondo-rosa"></div>
+    <div class="personaje">
+      <img src="jiamin.png" alt="Jiamin">
+    </div>
+    <div class="tarjeta">
+      Diseñadora con mención Industrial
+      <br><br>
+      Idiomas:
+      <ul>
+        <li>español</li>
+        <li>chino mandarín</li>
+        <li>chino cantonés</li>
+      </ul>
+      Soy muy buena en trabajos manuales y constructivos
+    </div>
+  </section>
+
+  <div id="proyectos"></div>
+
+  <!-- RÉPLICA MIMUS TENCA -->
+  <section class="proyecto azul">
+    <h2>Réplica Mimus Tenca</h2>
+    <div class="img-grande">
+      <img src="tenca 1.jpg" alt="Réplica Mimus Tenca">
+    </div>
+    <a class="btn-info" href="#mimus-tenca">Más info</a>
+  </section>
+  <div class="par">
+    <div class="izq"><div class="foto"><img src="tenca 2.jpg" alt=""></div></div>
+    <div class="der"><div class="foto"><img src="tenca 3.jpg" alt=""></div></div>
+  </div>
+
+  <!-- AUTÓMATA MECÁNICO DE MADERA -->
+  <section class="proyecto rosa">
+    <h2>Autómata mecánico de madera</h2>
+    <div class="img-grande">
+      <img src="automata 1.jpg" alt="Autómata mecánico de madera">
+    </div>
+    <a class="btn-info" href="#automata">Más info</a>
+  </section>
+  <div class="par">
+    <div class="izq"><div class="foto"><img src="lijando automata.jpg" alt=""></div></div>
+    <div class="der"><div class="foto"><img src="automata 3.jpg" alt=""></div></div>
+  </div>
+
+  <!-- ILUMINARIA -->
+  <section class="proyecto azul">
+    <h2>Iluminaria</h2>
+    <div class="img-doble">
+      <div class="a"><img src="lampara 1.jpg" alt=""></div>
+      <div class="a"><img src="lampara 4.jpg" alt=""></div>
+    </div>
+    <a class="btn-info" href="#iluminaria">Más info</a>
+  </section>
+  <div class="par">
+    <div class="izq"><div class="foto"><img src="lampara 2.jpg" alt=""></div></div>
+    <div class="der"><div class="foto"><img src="lampara 5.jpg" alt=""></div></div>
+  </div>
+
+  <!-- ARV CHAIR -->
+  <section class="proyecto rosa">
+    <h2>Arv chair</h2>
+    <div class="img-grande" style="height:150px">
+      <img src="silla 1.jpg" alt="Arv chair">
+    </div>
+    <a class="btn-info" href="#arv-chair">Más info</a>
+  </section>
+  <div class="par">
+    <div class="izq"><div class="foto"><img src="silla 2.webp" alt=""></div></div>
+    <div class="der"><div class="foto"><img src="silla 3.jpg" alt=""></div></div>
+  </div>
+
+  <!-- CONTACTO -->
+  <footer class="contacto" id="contacto">
+    <h2>contacto</h2>
+    <a href="tel:+56997582081">+56 9 97582081</a>
+    <a href="https://melodydisigninstagram.com/" target="_blank" rel="noopener">jiamin design</a>
+    <a href="mailto:correo@mail.udp.cl">correo@mail.udp.cl</a>
+  </footer>
+</div>
+
+
+<!-- ============================================================
+     DETALLE: RÉPLICA MIMUS TENCA
+     ============================================================ -->
+<div class="detalle azul" id="mimus-tenca">
+  <div class="hoja-det">
+    <a class="volver" href="#inicio">← volver</a>
+    <h2>Réplica Mimus Tenca</h2>
+
+    <div class="portada-det"><img src="img/mimus-1.jpg" alt=""></div>
+
+    <p class="centrado">
+      Proyecto de réplica exacta de la ave Mimus Tenca en taller colectivo junto a Parque met para ser utilizado como instrumento de aprendizaje de aves metropolitanas.
+    </p>
+
+    <div class="fila">
+      <div class="foto"><img src="img/mimus-detalle.jpg" alt=""></div>
+      <div class="txt">
+        <p>Mi rol principal en este proyecto ha sido crear los pigmentos con exactitud para colorear la ave, los ojos y ver sellantes para lograr realismo y proteger los pigmentos, logrando el realismo que se buscaba en la réplica.<br>La creación del cuerpo principal y tallado</p>
+        <p>Proyecto creado en conjunto a:</p>
+        <ul>
+          <li>Isidora Alvarez</li>
+          <li>Dayana Palitrur</li>
+          <li>Camila Ramirez</li>
+        </ul>
+        <p>Proyecto trabajado en taller colectivo<br>-Docentes:<br>Sebastián Romero<br>Juan Ghili<br>En conjunto a ParqueMet</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     DETALLE: AUTÓMATA MECÁNICO DE MADERA
+     ============================================================ -->
+<div class="detalle rosa" id="automata">
+  <div class="hoja-det">
+    <a class="volver" href="#inicio">← volver</a>
+    <h2>Autómata mecánico de madera</h2>
+
+    <div class="portada-det"><img src="img/automata-1.jpg" alt=""></div>
+
+    <p class="centrado">
+      Proyecto hecho en madera, simplificando la forma de una ballena para generar la forma y funcionalidad requerida
+    </p>
+
+    <div class="fila">
+      <div class="foto horizontal"><img src="img/automata-detalle-1.jpg" alt=""></div>
+      <div class="txt">
+        <p>Se logró crear un mecanismo que al girar la manilla genera movimiento, dando la ilusión de que la ballena está nadando.</p>
+        <p>Fue creado a partir de chapas de terciado prensado y listones de madera.</p>
+      </div>
+    </div>
+
+    <div class="fila inversa">
+      <div class="foto horizontal"><img src="img/automata-detalle-2.jpg" alt=""></div>
+      <div class="txt">
+        <p>También contempla lijado de las partes para debastar partes y dar un buen acabado.</p>
+        <p>Proyecto trabajado en maquetas y materiales<br>-Docente:<br>Carolina Kassnovich</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     DETALLE: ILUMINARIA
+     ============================================================ -->
+<div class="detalle azul" id="iluminaria">
+  <div class="hoja-det">
+    <a class="volver" href="#inicio">← volver</a>
+    <h2>Iluminaria</h2>
+
+    <div class="fila">
+      <div class="foto"><img src="img/iluminaria-1.jpg" alt=""></div>
+      <div class="txt">
+        <p>Iluminaria con rango de luz ajustable gracias al papel de los costados se puede ajustar la cantidad de luz.</p>
+        <p>Está hecha con madera y dos pliegos de papel acuarela, el mecanismo que se utiliza es un contrapeso que está conectado a una especie de brazos que sostienen el papel, permitiendo bajar y subir el papel.</p>
+        <p>Se buscaba poder crear ambientes más iluminados o más íntimos, según la cantidad de luz que se deja proyectar.</p>
+      </div>
+    </div>
+
+    <div class="grid-fotos">
+      <div class="foto"><img src="img/iluminaria-3.jpg" alt=""></div>
+      <div class="foto"><img src="img/iluminaria-4.jpg" alt=""></div>
+    </div>
+
+    <div class="txt">
+      <p>Proyecto creado en conjunto a:</p>
+      <ul>
+        <li>Isidora Alvarez</li>
+        <li>Dayana Palitrur</li>
+        <li>Camila Ramirez</li>
+      </ul>
+      <p>Proyecto trabajado en taller colectivo<br>-Docentes:<br>Sebastián Romero<br>Juan Ghili<br>En conjunto a ParqueMet</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     DETALLE: ARV CHAIR
+     ============================================================ -->
+<div class="detalle rosa" id="arv-chair">
+  <div class="hoja-det">
+    <a class="volver" href="#inicio">← volver</a>
+    <h2>Arv chair</h2>
+
+    <div class="portada-det"><img src="img/arv-1.jpg" alt=""></div>
+
+    <p class="centrado">
+      Esta silla se caracteriza por su estructura, es levemente más angosta a la parte trasera y con una pequeña inclinación en el asiento y respaldo, la cual tiene una erda e inclinación que sostiene y da apoyo a la espalda.
+    </p>
+
+    <div class="fila">
+      <div class="foto"><img src="img/arv-2.jpg" alt=""></div>
+      <div class="txt">
+        <p>Se empezó por la creación de los moldes a partir de unos planos, luego dibujados en mdf para luego calcar en los listones de madera y empezar el tallado.</p>
+      </div>
+    </div>
+
+    <div class="fila inversa">
+      <div class="foto"><img src="img/arv-3.jpg" alt=""></div>
+      <div class="txt">
+        <p>Por último se unieron las partes mediante tarugos, sin utilizar tornillos ni clavos.</p>
+        <p>Proyecto trabajado en maquinas y procesos<br>-Docente:<br>Sebastian Romero</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
